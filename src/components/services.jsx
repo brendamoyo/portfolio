@@ -2,87 +2,98 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ServicesSection = styled.section`
-  padding: 60px 40px;
-  background: #f5f5f5;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px;
+  background: var(--bg-dark);
+  max-width: 1200px;
+  margin: 0 auto;
+`
+
+const SubHeader = styled.span`
+  font-size: 14px;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 8px;
 `
 
 const SectionTitle = styled.h2`
-  font-size: 36px;
-  color: black;
-  margin-bottom: 10px;
+  font-size: 38px;
+  color: var(--text-main);
+  margin-bottom: 45px;
+  font-weight: 700;
+  text-align: center;
+
+  span {
+    color: #38bdf8;
+  }
 `
 
-const SectionSubtitle = styled.p`
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 40px;
-`
-
-const CardsRow = styled.div`
+// Clean 2-column layout for Frontend vs Backend
+const ServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 900px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const ServiceCard = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 30px 20px;
-`
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-const IconBox = styled.div`
-  font-size: 32px;
-  margin-bottom: 15px;
+  &:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.1);
+  }
 `
 
 const CardTitle = styled.h3`
-  font-size: 18px;
-  color: black;
-  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 15px;
 `
 
-const CardText = styled.p`
-  font-size: 14px;
-  color: #666;
-  line-height: 1.5;
+const CardDescription = styled.p`
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
 `
 
 const Services = () => {
   return (
     <ServicesSection id="services">
-      <SectionTitle>What I Do Best</SectionTitle>
-      <CardsRow>
+      <SectionTitle>What I <span>Do Best</span></SectionTitle>
+
+      <ServicesGrid>
         <ServiceCard>
-          
-          <CardTitle>UI/UX Interface Design</CardTitle>
-          <CardText>
-            Architecting high-fidelity mockups, complex layout systems, user flow
-            frameworks, and digital prototypes.
-          </CardText>
+          <CardTitle>Frontend Development</CardTitle>
+          <CardDescription>
+            Deploying pixel-perfect, highly responsive layouts built with modern component architectures like React, Vite, and styled-components. Focused on seamless performance tuning, modular structure, and clean user flows.
+          </CardDescription>
         </ServiceCard>
+
         <ServiceCard>
-          <CardTitle>Engineered Frontend Systems</CardTitle>
-          <CardText>
-            Deploying pixel-perfect responsive layouts built with modern component
-            architectures and seamless performance tuning.
-          </CardText>
+          <CardTitle>Backend Development</CardTitle>
+          <CardDescription>
+            Architecting robust server-side logic, managing relational and non-relational database models, and constructing highly performant API endpoints to handle dynamic ecosystem scaling with structural integrity.
+          </CardDescription>
         </ServiceCard>
-        <ServiceCard>
-          <CardTitle>Growth & Marketing Strategy</CardTitle>
-          <CardText>
-            Formulating go-to-market data models, landing page optimization flows,
-            and customer acquisition funnels.
-          </CardText>
-        </ServiceCard>
-        <ServiceCard>
-          <CardTitle>Full Product Management</CardTitle>
-          <CardText>
-            Overseeing digital products from competitive analysis and system architecture
-            up through production launch.
-          </CardText>
-        </ServiceCard>
-      </CardsRow>
+      </ServicesGrid>
     </ServicesSection>
   )
 }

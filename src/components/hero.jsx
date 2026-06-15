@@ -3,106 +3,156 @@ import styled from 'styled-components'
 
 const HeroSection = styled.section`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 60px 40px;
-  background: #f5f5f5;
-  gap: 40px;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 100px 40px;
+  background: var(--bg-dark);
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 968px) {
+    flex-direction: column-reverse; 
+    text-align: center;
+    padding: 60px 20px;
+  }
 `
 
-const LeftSide = styled.div`
-  flex: 1;
+const TextContainer = styled.div`
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @media (max-width: 968px) {
+    align-items: center;
+  }
 `
 
-const Title = styled.h1`
-  font-size: 48px;
-  color: black;
+
+const WelcomeTag = styled.span`
+  font-size: 14px;
+  color: #38bdf8; 
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  margin-bottom: 12px;
+`
+
+
+const MainHeading = styled.h1`
+  font-size: 52px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+  margin-bottom: 15px;
+
+  span {
+    color: #38bdf8; 
+  }
+
+  @media (max-width: 480px) {
+    font-size: 40px;
+  }
+`
+
+const SubRole = styled.h2`
+  font-size: 20px;
+  color: #38bdf8;
+  font-weight: 600;
   margin-bottom: 20px;
 `
 
-const Description = styled.p`
+const BioDescription = styled.p`
   font-size: 16px;
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 30px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 35px;
+  max-width: 580px;
 `
 
-const BlueText = styled.span`
-  color: black;
-  font-weight: bold;
-`
 
-const HelloBtn = styled.a`
-  background: #0052a3;
+const ClientCTA = styled.a`
+  background: #38bdf8;
   color: white;
-  padding: 12px 24px;
-  border-radius: 5px;
+  padding: 14px 40px;
+  border-radius: 30px; 
   text-decoration: none;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   display: inline-block;
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    background: #003d7a;
+    background: #0284c7;
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
   }
 `
 
-const StatsBox = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 40px;
-  display: inline-block;
+
+const ImageWrapper = styled.div`
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 350px;
+  height: 350px;
+
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #38bdf8 0%, transparent 75%);
+    z-index: 1;
+    opacity: 0.5;
+    filter: blur(12px);
+  }
+
+  @media (max-width: 480px) {
+    width: 280px;
+    height: 280px;
+  }
 `
 
-const StatNumber = styled.div`
-  font-size: 32px;
-  font-weight: bold;
-  color: #0052a3;
-`
-
-const StatText = styled.div`
-  font-size: 14px;
-  color: #666;
-`
-
-const RightSide = styled.div`
-  flex: 1;
-  text-align: center;
-`
-
-const ProfileImg = styled.img`
-  width: 300px;
-  height: 300px;
+const CircularImage = styled.img`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
   object-fit: cover;
+  object-position: top; 
+  border: 4px solid #38bdf8; 
+  z-index: 2;
+  background: #111; 
 `
+
 
 const Hero = () => {
-  const sayHello = (e) => {
-    e.preventDefault()
-    const contactSection = document.getElementById('cta')
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-  
-
   return (
-    <HeroSection id="hero">
-      <LeftSide>
-        <Title>Hello, I'm<br />Brenda Moyo</Title>
-        <Description>
-          I'm a Freelance <BlueText>Full stacked Software Engineer</BlueText> and{' '}
-          <BlueText>Developer</BlueText>. Im Brenda Moyo, a Software Developer based in
-          Bulawayo, Zimbabwe. I strive to build immersive and beautiful web applications
-          through carefully crafted code and user-centric design.
-        </Description>
-        <HelloBtn href="#cta" onClick={sayHello}>Say Hello!</HelloBtn>
-       
-      </LeftSide>
-      <RightSide>
-        <ProfileImg src="/dev.jpeg" alt="Brenda Moyo" />
-      </RightSide>
+    <HeroSection id="home">
+      <TextContainer>
+        <WelcomeTag>Hello!</WelcomeTag>
+        <MainHeading>I'm <span>Brenda Moyo</span></MainHeading>
+        <SubRole>Fullstake Web Developer</SubRole>
+        <BioDescription>
+          Based in Bulawayo, Zimbabwe, I strive to build immersive and beautiful web 
+          applications through carefully crafted code and user-centric design layouts.
+        </BioDescription>
+        <ClientCTA href="#contact">contact me</ClientCTA>
+      </TextContainer>
+
+      
+      <ImageWrapper>
+        <CircularImage src="/brenda.jpeg" alt="Brenda Moyo" />
+      </ImageWrapper>
     </HeroSection>
   )
 }

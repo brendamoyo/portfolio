@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { Box, TextField, Button, Typography, Fade, Grow, Zoom, Slide } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
+import EmailIcon from '@mui/icons-material/Email'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 const CTASection = styled.section`
   padding: 100px 40px;
   background: var(--bg-dark);
   max-width: 1200px;
   margin: 0 auto;
+  transition: background var(--transition-smooth);
 
   @media (max-width: 768px) {
     padding: 60px 20px;
@@ -13,7 +18,7 @@ const CTASection = styled.section`
 `
 
 const CTABox = styled.div`
-  background: var(--bg-card);
+  background: var(--bg-elevated);
   border: 1px solid var(--border-card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -23,8 +28,8 @@ const CTABox = styled.div`
   gap: 60px;
   position: relative;
   overflow: hidden;
+  transition: background var(--transition-smooth), border-color var(--transition-smooth);
 
-  
   &::before {
     content: '';
     position: absolute;
@@ -32,7 +37,19 @@ const CTABox = styled.div`
     right: -150px;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.06) 0%, transparent 70%);
     z-index: 1;
     pointer-events: none;
   }
@@ -47,6 +64,9 @@ const CTABox = styled.div`
 const LeftSide = styled.div`
   flex: 1;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 
 const RightSide = styled.div`
@@ -54,123 +74,261 @@ const RightSide = styled.div`
   z-index: 2;
 `
 
-const CTATitle = styled.h2`
-  font-family: var(--font-heading);
-  font-size: 38px;
-  font-weight: 800;
-  color: var(--text-main);
-  margin-bottom: 20px;
-  letter-spacing: -1px;
-  line-height: 1.2;
-`
-
-const CTAText = styled.p`
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text-muted);
-`
-
-const StyledForm = styled.form`
+const InfoItem = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-`
-
-const FormInput = styled.input`
-  font-family: var(--font-body);
-  width: 100%;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  color: var(--text-main);
-  font-size: 14px;
-  outline: none;
-  transition: var(--transition-smooth);
-
-  &::placeholder {
-    color: var(--text-dark);
-  }
-
-  &:focus {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(79, 70, 229, 0.15);
-  }
-`
-
-const FormTextarea = styled.textarea`
-  font-family: var(--font-body);
-  width: 100%;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  color: var(--text-main);
-  font-size: 14px;
-  outline: none;
-  resize: vertical;
-  transition: var(--transition-smooth);
-
-  &::placeholder {
-    color: var(--text-dark);
-  }
-
-  &:focus {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(79, 70, 229, 0.15);
-  }
-`
-
-const SubmitBtn = styled.button`
-  font-family: var(--font-heading);
-  background: blue;
-  color: white;
-  padding: 14px 28px;
-  border: none;
-  border-radius: 8px;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  color: var(--text-muted);
   font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+  svg {
+    color: #38bdf8;
+    font-size: 22px;
   }
+`
 
-  &:active {
-    transform: translateY(0);
+const StyledTextField = styled(TextField)`
+  && {
+    margin-bottom: 16px;
+
+    .MuiOutlinedInput-root {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      color: var(--text-main);
+      transition: all 0.3s ease;
+
+      fieldset {
+        border-color: rgba(255, 255, 255, 0.1);
+        transition: border-color 0.3s ease;
+      }
+
+      &:hover fieldset {
+        border-color: rgba(56, 189, 248, 0.4);
+      }
+
+      &.Mui-focused fieldset {
+        border-color: #38bdf8;
+        border-width: 2px;
+      }
+
+      &.Mui-focused {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    .MuiInputLabel-root {
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      transition: color 0.3s ease;
+
+      &.Mui-focused {
+        color: #38bdf8;
+      }
+    }
+
+    .MuiInputLabel-shrink {
+      background: transparent;
+    }
+
+    .MuiOutlinedInput-input {
+      padding: 16px 18px;
+      font-size: 14px;
+    }
+
+    .MuiInputBase-input::placeholder {
+      color: var(--text-dark);
+      opacity: 1;
+    }
+
+    &.message-field .MuiOutlinedInput-root {
+      padding: 0;
+    }
+  }
+`
+
+const StyledButton = styled(Button)`
+  && {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: none;
+    font-family: var(--font-heading);
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.5s ease;
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      box-shadow: 0 8px 30px rgba(56, 189, 248, 0.5);
+
+      &::after {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    .MuiButton-endIcon {
+      margin-left: 10px;
+    }
   }
 `
 
 const CTA = () => {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const form = e.target
+    form.submit()
+  }
+
   return (
-    <CTASection id="cta">
-      <CTABox>
-        <LeftSide>
-          <CTATitle>Let's build something legendary.</CTATitle>
-          <CTAText>
-            Currently accepting high-impact contract roles, dedicated engineering
-            positions, and elite interface design overhaul projects. Drop me a line
-            and let's scale your metrics.
-          </CTAText>
-        </LeftSide>
-        <RightSide>
-          <StyledForm
-            action="https://formsubmit.co/66bb05fb638f956270b359a6cea32587"
-            method="POST"
-          >
-            <FormInput type="text" name="name" placeholder="Your Name" required />
-            <FormInput type="email" name="email" placeholder="Your Email" required />
-            <FormTextarea name="message" placeholder="Your Message" rows="4" required />
-            <SubmitBtn type="submit">Send Message</SubmitBtn>
-          </StyledForm>
-        </RightSide>
-      </CTABox>
+    <CTASection id="contact">
+      <Fade in timeout={800}>
+        <CTABox>
+          <LeftSide>
+            <Zoom in timeout={1000}>
+              <Box>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontWeight: 800,
+                    color: 'var(--text-main)',
+                    fontSize: { xs: '30px', md: '38px' },
+                    letterSpacing: '-1px',
+                    lineHeight: 1.2,
+                    mb: 2,
+                    fontFamily: 'var(--font-heading)',
+                  }}
+                >
+                  Let's build something{' '}
+                  <Box component="span" sx={{ color: '#38bdf8' }}>
+                    legendary.
+                  </Box>
+                </Typography>
+              </Box>
+            </Zoom>
+
+            <Grow in timeout={1200}>
+              <Box>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'var(--text-muted)',
+                    lineHeight: 1.7,
+                    mb: 3,
+                    fontSize: '15px',
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  Currently accepting high-impact contract roles, dedicated engineering
+                  positions, and elite interface design overhaul projects. Drop me a line
+                  and let's scale your metrics.
+                </Typography>
+
+                <Slide direction="up" in timeout={1400}>
+                  <Box>
+                    <InfoItem>
+                      <EmailIcon />
+                      <span>brendamoyo@email.com</span>
+                    </InfoItem>
+                    <InfoItem>
+                      <LocationOnIcon />
+                      <span>Bulawayo, Zimbabwe</span>
+                    </InfoItem>
+                  </Box>
+                </Slide>
+              </Box>
+            </Grow>
+          </LeftSide>
+
+          <RightSide>
+            <Slide direction="left" in timeout={1000}>
+              <Box>
+                <form
+                  action="https://formsubmit.co/66bb05fb638f956270b359a6cea32587"
+                  method="POST"
+                  onSubmit={handleSubmit}
+                >
+                  <StyledTextField
+                    fullWidth
+                    label="Your Name"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    variant="outlined"
+                    size="medium"
+                    InputLabelProps={{ shrink: true }}
+                    placeholder="John Doe"
+                  />
+
+                  <StyledTextField
+                    fullWidth
+                    label="Your Email"
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    variant="outlined"
+                    size="medium"
+                    InputLabelProps={{ shrink: true }}
+                    placeholder="john@example.com"
+                  />
+
+                  <StyledTextField
+                    fullWidth
+                    label="Your Message"
+                    name="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
+                    variant="outlined"
+                    size="medium"
+                    multiline
+                    rows={4}
+                    className="message-field"
+                    InputLabelProps={{ shrink: true }}
+                    placeholder="Tell me about your project..."
+                  />
+
+                  <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <StyledButton
+                      type="submit"
+                      variant="contained"
+                      endIcon={<SendIcon />}
+                    >
+                      Send Message
+                    </StyledButton>
+                  </Box>
+                </form>
+              </Box>
+            </Slide>
+          </RightSide>
+        </CTABox>
+      </Fade>
     </CTASection>
   )
 }

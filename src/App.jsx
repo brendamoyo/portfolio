@@ -1,4 +1,5 @@
 import React from 'react'
+import { ThemeProvider } from './context/ThemeContext'
 import Header from './components/header'
 import Hero from './components/hero'
 import About from './components/about'
@@ -10,7 +11,7 @@ import Footer from './components/footer'
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider>
       <Header />
       <Hero />
       <About />
@@ -19,7 +20,7 @@ const App = () => {
       <Reviews />
       <CTA />
       <Footer />
-    </>
+    </ThemeProvider>
   )
 }
 

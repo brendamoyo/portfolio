@@ -46,8 +46,8 @@ const FilterRow = styled.div`
 
 const FilterTab = styled.button`
   font-family: var(--font-heading);
-  background: black;
-  color: ${props => props.$active ? 'white' : 'var(--text-muted)'};
+  background: #38bdf8;
+  color: ${props => props.$active ? '#ffffff' : 'var(--text-muted)'};
   border: 1px solid ${props => props.$active ? 'transparent' : 'var(--border-card)'};
   padding: 8px 20px;
   border-radius: 20px;
@@ -57,9 +57,9 @@ const FilterTab = styled.button`
   transition: var(--transition-smooth);
 
   &:hover {
-    color: grey;
-    background: ${props => props.$active ? '' : 'rgba(255, 255, 255, 0.08)'};
-    border-color: ${props => props.$active ? 'transparent' : 'rgba(255, 255, 255, 0.2)'};
+    color: #ffffff;
+    background: ${props => props.$active ? '' : 'rgba(56, 189, 248, 0.2)'};
+    border-color: ${props => props.$active ? 'transparent' : 'rgba(56, 189, 248, 0.4)'};
   }
 `
 
@@ -82,14 +82,10 @@ const ProjectCard = styled.div`
   overflow: hidden;
   background: var(--bg-card);
   border: 1px solid var(--border-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   transition: var(--transition-smooth);
   display: flex;
   flex-direction: column;
   height: 100%;
-
-
 `
 
 const ImageContainer = styled.div`
@@ -103,11 +99,6 @@ const ProjectImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-
-  ${ProjectCard}:hover & {
-    transform: scale(1.08);
-  }
 `
 
 const ProjectInfo = styled.div`
@@ -142,13 +133,13 @@ const TechRow = styled.div`
 `
 
 const Tag = styled.span`
-  background: rgba(79, 70, 229, 0.12);
-  color: #a5b4fc;
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 12px;
   font-weight: 600;
-  border: 1px solid rgba(79, 70, 229, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.2);
 `
 
 const ActionsRow = styled.div`
@@ -171,13 +162,12 @@ const ActionLink = styled.a`
   justify-content: center;
 
   &.primary {
-    background:blue;
-    color: white;
-    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
 
     &:hover {
-      background: black;
-      transform : translateY(-2px)
+      background:#0284c7;
     }
   }
 
@@ -189,7 +179,6 @@ const ActionLink = styled.a`
     &:hover {
       background: rgba(255, 255, 255, 0.05);
       border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
     }
   }
 `
@@ -201,7 +190,7 @@ const Portfolio = () => {
     {
       name: 'My-to-do-list-app',
       category: 'React',
-      description: 'A simple and responsive productivity web application built with React.js.',
+      description: 'This was my first React project at Uncommon. It helps you write down tasks and tick them off when done. Nothing fancy but I was proud of it.',
       tech: 'React.js',
       github: 'https://github.com/brendamoyo/my-to-do-list-app.git',
       liveLink: 'https://my-to-do-list-app-eta.vercel.app/',
@@ -210,68 +199,78 @@ const Portfolio = () => {
     {
       name: 'Form',
       category: 'React',
-      description: 'A modern React contact form built with Styled Components and Web3Forms.',
+      description: 'Built this contact form as part of my learning at Uncommon. People can fill in their name, email and message then it gets sent somewhere.',
       tech: 'React.js',
       github: 'https://github.com/brendamoyo/form.git',
       liveLink: 'https://vercel.com/brenda-a-projects7/form-8ggg',
       image: '/forms.png'
     },
     {
-      name: 'my-portfolio',
+      name: 'My Portfolio',
       category: 'React',
-      description: 'Professional dark-themed React portfolio engineered for visual excellence.',
+      description: 'The very site you are looking at right now! I built it from scratch at Uncommon to show off the projects I have been working on.',
       tech: 'React.js',
       github: 'https://github.com/brendamoyo/my-portfolio.git',
+      liveLink: 'https://brendamoyo-portfolio.vercel.app/',
       image: '/portfolio.png'
     },
     {
-      name: 'Weather app',
+      name: 'Weather App',
       category: 'JavaScript',
-      description: 'A weather forecasting web application pulling data from external APIs.',
+      description: 'I used an API to fetch weather data for any city you type in. It shows temperature and conditions. Was tricky getting the API to work at first.',
       tech: 'JavaScript',
       github: 'https://github.com/alwandemasie-code/weather-app.git',
+      liveLink: 'https://weather-app-ten-gamma.vercel.app/',
       image: '/weather.png'
     },
     {
-      name: 'age_calculator',
+      name: 'Age Calculator',
       category: 'JavaScript',
-      description: 'An interactive date calculation tool designed with pixel-perfect layouts.',
+      description: 'A small tool I made at Uncommon - you put in your birthday and it tells you how old you are in years, months and days. Simple but it works.',
       tech: 'JavaScript',
       github: 'https://github.com/alwandemasie-code/ageculculator.git',
+      liveLink: 'https://age-calculator-nine-eta.vercel.app/',
       image: '/calculator.png'
     },
     {
-      name: 'calculator',
+      name: 'Calculator',
       category: 'JavaScript',
-      description: 'A fully functional desktop calculator utility with responsive layout grid.',
+      description: 'A basic calculator that does addition, subtraction, multiplication and division. One of the first projects I coded at Uncommon.',
       tech: 'JavaScript',
       github: 'https://github.com/alwandemasie-code/Calculator.git',
+      liveLink: 'https://calculator-six-phi-11.vercel.app/',
       image: '/calc.png'
     },
     {
-      name: 'studentlist',
+      name: 'Student List',
       category: 'Tools',
-      description: 'A student record registration dashboard for educational data management.',
+      description: 'Made this to practice working with lists in JavaScript. You can add student names and remove them. We used similar ideas in class at Uncommon.',
       tech: 'HTML/CSS/JS',
       github: 'https://github.com/alwandemasie-code/student-register.git',
+      liveLink: 'https://student-register-lake.vercel.app/',
       image: '/studentlist.png'
     },
     {
-      name: 'popup message',
+      name: 'Popup Message',
       category: 'Tools',
-      description: 'A reusable modal, alert, and popup system with dynamic animation triggers.',
+      description: 'A popup system I built to understand how modals work on websites. It shows messages when you click a button. Learned a lot from this one.',
       tech: 'HTML/CSS/JS',
       github: 'https://github.com/alwandemasie-code/pop_up_message.git',
+      liveLink: 'https://pop-up-message-seven.vercel.app/',
       image: '/pop.png'
     },
     {
-      name: 'My first website',
+      name: 'My First Website',
       category: 'Tools',
-      description: 'A clean introductory marketing website built using fundamental styling standards.',
+      description: 'This is where it all started at Uncommon. My very first website using just HTML and CSS. It is simple but it reminds me how far I have come.',
       tech: 'HTML/CSS',
       github: 'https://github.com/alwandemasie-code/My-first-website.git',
+      liveLink: 'https://my-first-website-eight-neon.vercel.app/',
       image: '/first_website.png'
-    }
+    },
+   
+    
+    
   ]
 
   const categories = ['All', 'React', 'JavaScript', 'Tools']
