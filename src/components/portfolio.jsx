@@ -162,23 +162,24 @@ const ActionLink = styled.a`
   justify-content: center;
 
   &.primary {
-    background: var(--primary);
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
     color: #ffffff;
-    box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+    border-radius: 25px;
 
     &:hover {
-      background:#0284c7;
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
     }
   }
 
   &.secondary {
-    background: transparent;
-    color: var(--text-main);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+    border-radius: 25px;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
     }
   }
 `
@@ -190,7 +191,7 @@ const Portfolio = () => {
     {
       name: 'My-to-do-list-app',
       category: 'React',
-      description: 'This was my first React project at Uncommon. It helps you write down tasks and tick them off when done. Nothing fancy but I was proud of it.',
+      description: 'My first React project at Uncommon. You can add tasks and delete them when you finish. I was happy it actually worked.',
       tech: 'React.js',
       github: 'https://github.com/brendamoyo/my-to-do-list-app.git',
       liveLink: 'https://my-to-do-list-app-eta.vercel.app/',
@@ -199,7 +200,7 @@ const Portfolio = () => {
     {
       name: 'Form',
       category: 'React',
-      description: 'Built this contact form as part of my learning at Uncommon. People can fill in their name, email and message then it gets sent somewhere.',
+      description: 'A contact form I made while learning React at Uncommon. People type their name, email and message and it gets submitted. Simple and clean.',
       tech: 'React.js',
       github: 'https://github.com/brendamoyo/form.git',
       liveLink: 'https://vercel.com/brenda-a-projects7/form-8ggg',
@@ -208,7 +209,7 @@ const Portfolio = () => {
     {
       name: 'My Portfolio',
       category: 'React',
-      description: 'The very site you are looking at right now! I built it from scratch at Uncommon to show off the projects I have been working on.',
+      description: 'This website you are looking at now. I built it at Uncommon to show my projects. Still learning how to make it better.',
       tech: 'React.js',
       github: 'https://github.com/brendamoyo/my-portfolio.git',
       liveLink: 'https://brendamoyo-portfolio.vercel.app/',
@@ -217,7 +218,7 @@ const Portfolio = () => {
     {
       name: 'Weather App',
       category: 'JavaScript',
-      description: 'I used an API to fetch weather data for any city you type in. It shows temperature and conditions. Was tricky getting the API to work at first.',
+      description: 'Type any city and it tells you the weather. Had a hard time getting the API to work but my instructor helped me figure it out.',
       tech: 'JavaScript',
       github: 'https://github.com/alwandemasie-code/weather-app.git',
       liveLink: 'https://weather-app-ten-gamma.vercel.app/',
@@ -226,7 +227,7 @@ const Portfolio = () => {
     {
       name: 'Age Calculator',
       category: 'JavaScript',
-      description: 'A small tool I made at Uncommon - you put in your birthday and it tells you how old you are in years, months and days. Simple but it works.',
+      description: 'Enter your birthday and it tells you how old you are. Made this at Uncommon to practice working with dates in JavaScript.',
       tech: 'JavaScript',
       github: 'https://github.com/alwandemasie-code/ageculculator.git',
       liveLink: 'https://age-calculator-nine-eta.vercel.app/',
@@ -235,7 +236,7 @@ const Portfolio = () => {
     {
       name: 'Calculator',
       category: 'JavaScript',
-      description: 'A basic calculator that does addition, subtraction, multiplication and division. One of the first projects I coded at Uncommon.',
+      description: 'Does adding, subtracting, multiplying and dividing. One of the first things I built when I started learning JavaScript at Uncommon.',
       tech: 'JavaScript',
       github: 'https://github.com/alwandemasie-code/Calculator.git',
       liveLink: 'https://calculator-six-phi-11.vercel.app/',
@@ -244,7 +245,7 @@ const Portfolio = () => {
     {
       name: 'Student List',
       category: 'Tools',
-      description: 'Made this to practice working with lists in JavaScript. You can add student names and remove them. We used similar ideas in class at Uncommon.',
+      description: 'A list where you can add student names and remove them. Made this in class at Uncommon to practice JavaScript arrays.',
       tech: 'HTML/CSS/JS',
       github: 'https://github.com/alwandemasie-code/student-register.git',
       liveLink: 'https://student-register-lake.vercel.app/',
@@ -253,7 +254,7 @@ const Portfolio = () => {
     {
       name: 'Popup Message',
       category: 'Tools',
-      description: 'A popup system I built to understand how modals work on websites. It shows messages when you click a button. Learned a lot from this one.',
+      description: 'Click a button and a message pops up. Made this to understand how modals work. It was fun to build.',
       tech: 'HTML/CSS/JS',
       github: 'https://github.com/alwandemasie-code/pop_up_message.git',
       liveLink: 'https://pop-up-message-seven.vercel.app/',
@@ -262,18 +263,15 @@ const Portfolio = () => {
     {
       name: 'My First Website',
       category: 'Tools',
-      description: 'This is where it all started at Uncommon. My very first website using just HTML and CSS. It is simple but it reminds me how far I have come.',
+      description: 'My very first website ever. Just HTML and CSS. Nothing special but it is where I started at Uncommon.',
       tech: 'HTML/CSS',
       github: 'https://github.com/alwandemasie-code/My-first-website.git',
       liveLink: 'https://my-first-website-eight-neon.vercel.app/',
       image: '/first_website.png'
     },
-   
-    
-    
   ]
 
-  const categories = ['All', 'React', 'JavaScript', 'Tools']
+const categories = ['All', 'React', 'JavaScript', 'Tools']
 
   const filteredProjects = filter === 'All' 
     ? projects 
